@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Algebras Don't Lie</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/mathquill.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<style>
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
+
+  #t {
+    width: 100%;
+    height: 540px;
+    overflow: auto;
+  }
+  * {box-sizing: border-box}
+  /* Full-width input fields */
+    input[type=text], input[type=password], input[type=tel] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* Add a background color when the inputs get focus */
+  input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for all buttons */
+  button {
+    background-color: #4C50CF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+
+  button:hover {
+    opacity:1;
+  }
+
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    background: linear-gradient(to right,red,orange,yellow,green,blue,indigo,violet);
+  }
+
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn, .signupbtn {
+    float: left;
+    width: 50%;
+  }
+
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(71,88,93, 0.9);
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #cccccc;
+    margin-left: 30%;
+    margin-top: 3%;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 90%;
+  }
+
+  #info {
+    z-index: 20;
+  }
+
+  #info h2 {
+    text-align: center;
+  }
+
+  #info p {
+    padding: 5%;
+  }
+
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+      width: 100%;
+    }
+  }
+
+  #config-menu > * {
+    width: 10%;
+    display: inline-block;
+  }
+
+
+#image-display {
+  position: absolute;
+  width: 45%;
+  left: 45%;
+  top: 4.5%;
+  padding: 16px;
+  z-index: 5;
+}
+
+  #id01 {
+    display: block;
+  }
+</style>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>
+    // Make the div with id 'mycell' a Sage cell
+    sagecell.makeSagecell({inputLocation:  '#cell1',
+                           template:       sagecell.templates.minimal,
+                           autoeval: true,
+                           hide: ['editor', 'evalButton']
+                         });
+        sagecell.makeSagecell({inputLocation:  '#cell2',
+                           template:       sagecell.templates.minimal,
+                           autoeval: true,
+                           hide: ['editor', 'evalButton'],
+                           linked: true
+                         });
+        sagecell.makeSagecell({inputLocation:  '#cell3',
+                   template:       sagecell.templates.minimal,
+                   autoeval: true,
+                   hide: ['editor', 'evalButton'],
+                 });
+        sagecell.makeSagecell({inputLocation:  '#cell4',
+           template:       sagecell.templates.minimal,
+           autoeval: true,
+           hide: ['editor', 'evalButton'],
+         });
+    </script>
+</head>
+<body>
+<div>
+    
+    <div style="display: block; position: absolute;width: 50%; left: 0%"><h2>Root System Plots</h2><div id="cell1"><script type="text/x-sage">
+ctype='###'
+@interact(layout=dict(top=[['ctype', 'hyperplanes']]))
+def _(ctype=ctype, hyperplanes=['all',False]):
+    try: 
+      CartanType(ctype)
+      L = RootSystem(ctype).ambient_space()
+      if L.dimension() > 3:
+        print(ctype + " has dimension greater than 3 and cannot be plotted without a projection.")
+      else:
+        show("All Roots")
+        p1 = L.plot(roots='all', reflection_hyperplanes=hyperplanes)
+        show(p1)
+        show("Simple Roots")
+        p3 = L.plot(roots='simple', reflection_hyperplanes=hyperplanes)
+        show(p3)
+        show("Coroots")
+        p4 = L.plot(coroots='all', reflection_hyperplanes=hyperplanes)
+        show(p4)
+    except:
+      print(ctype + " is not a Cartan Type")
+ </script>
+</div></div>
+<div style="display: block; position: absolute; width: 50%; left: 50%">
+    <h2>Hedron Polytope Embedding</h2>
+    <div id="cell2"><script type="text/x-sage">
+ctype = '###'
+def _f(ctype):
+    try: 
+      CartanType(ctype)
+      L = RootSystem(ctype).ambient_space()
+      if L.dimension() > 4:
+        print(ctype + " cannot be well-projected in 3-dimensional space")
+      else:
+        p1 = L.plot_hedron()
+        show(p1)
+    except:
+      print(ctype + " is not a Cartan Type")
+_f(ctype)
+ </script></div>
+     <h2>Coxeter Properties</h2>
+    <div id="cell3"><script type="text/x-sage">
+ctype = '###'
+def _f2(ctype=''):
+    try:
+        ct = CartanType(ctype)
+        show("Dynkin Diagram")
+        show(ct.dynkin_diagram())
+        show("Coxeter Number and Dual")
+        show(ct.coxeter_number())
+        show(ct.dual_coxeter_number())
+        show("Coxeter Matrix")
+        show(ct.coxeter_matrix())
+    except:
+        print(ctype + " is not a Cartan Type")
+_f2(ctype)
+ </script>
+</div>     
+<h2>Weyl Group</h2>
+    <div id="cell4"><script type="text/x-sage">
+ctype = '###'
+def _f3(ctype=''):
+    try:
+        ct = CartanType(ctype)
+        show("Cayley Graph")
+        d = WeylGroup(ct).cayley_graph()
+        d.show3d(color_by_label=True, edge_size=0.01, vertex_size=0.03)
+    except:
+        print(ctype + " is not a Cartan Type")
+_f3(ctype)
+ </script>
+</div>
+</div>
+</body>

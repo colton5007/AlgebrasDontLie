@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Algebras Don't Lie</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/mathquill.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<style>
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
+
+  #t {
+    width: 100%;
+    height: 540px;
+    overflow: auto;
+  }
+  * {box-sizing: border-box}
+  /* Full-width input fields */
+    input[type=text], input[type=password], input[type=tel] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* Add a background color when the inputs get focus */
+  input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for all buttons */
+  button {
+    background-color: #4C50CF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+
+  button:hover {
+    opacity:1;
+  }
+
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    background: linear-gradient(to right,red,orange,yellow,green,blue,indigo,violet);
+  }
+
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn, .signupbtn {
+    float: left;
+    width: 50%;
+  }
+
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(71,88,93, 0.9);
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #cccccc;
+    margin-left: 30%;
+    margin-top: 3%;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 90%;
+  }
+
+  #info {
+    z-index: 20;
+  }
+
+  #info h2 {
+    text-align: center;
+  }
+
+  #info p {
+    padding: 5%;
+  }
+
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+      width: 100%;
+    }
+  }
+
+  #config-menu > * {
+    width: 10%;
+    display: inline-block;
+  }
+
+
+#image-display {
+  position: absolute;
+  width: 45%;
+  left: 45%;
+  top: 4.5%;
+  padding: 16px;
+  z-index: 5;
+}
+
+  #id01 {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+  <div id="info" style="display: block" class="modal">
+    <div class="modal-content" style="background-color: gray">
+      <h2><u>Algebras Dont Lie</u></h2>
+      <p>
+        &emsp; &emsp;I once was told that the more confusing math becomes, the more elegant it is to the understood eye. It might
+        seem like chaos and magic to one person, but to a well trained mind and eye, it becomes an intricate series of
+        patterns. This is a playful utility that lets you experience the patterns for yourself. There is no graph, no
+        strict equations, no scary derivatives, or weird set theory, just a canvas and a few inputs where you can put
+        whatever your heart and mind desires (within reason). Simply give it an equation for R, G, B with parameters of
+        x and y, and see what gets draw onto the canvas in front of you. It might take a minute or two since this is
+        quite a sizable number of calculations, but it'll come to fruition. <br>
+
+        &emsp;&emsp;If you are interested in the calculations being done or the text parsing that takes place to allow
+        you to have such a pleasant environment to enter data in, please checkout the
+        <a href="https://github.com/colton5007/Math-is-Beautiful">github repo</a>. It might just seem like a pretty
+        image generator but there is a lot going on here. Over 3145728 calculations are done alone which is the shortest
+        part when you consider the effort it takes to parse even simple symbolic expressions and interpret them
+        programmatically.<br>
+
+        &emsp;&emsp;Whenever you are ready to try it out for yourself click the button below and I hope you have fun and
+        learn something.
+        <form action="/explore" method="POST">
+          <input name='ctype' id='ctype' type='text'></input>
+          <button onclick="document.getElementById('info').style.display = 'none'">Explore</button>
+        </form>
+      </p>
+    </div>
+  </div>
+  </div>
+</div>
+
+</body>
